@@ -24,194 +24,194 @@ rel="stylesheet">
 
 <script>
 
-$(document).ready(function()
-{
-var markers = new L.MarkerClusterGroup();
-
-const d = new Date();
-var month = d.getMonth() + 1;
-var monthp = d.getMonth();
-var date = d.getDate();
-var year = d.getFullYear();
-var m = month.toString();
-var mp = monthp.toString();
-var day = date.toString();
-var y = year.toString();
-
-if (month<10)
-{
-m = "0" + m;
-}
-if (monthp<10)
-{
-mp = "0" + mp;
-}
-if (date<10)
-{
-day = "0" + day;
-}
-
-
-$(".button4").click(function()
-{
-$.get("https://api.sense.city/statistics/issue?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&issue=garbage&limit=30", function(data, status)
-{
-
-console.log(data);
-
-var blueIcon = L.divIcon({
-                className: 'custom-div-icon',
-                html: "<div style='background-color:#2A81CB;' class='marker-pin'></div><i class='material-icons'>delete</i>",
-                iconSize: [30, 42],
-                iconAnchor: [15, 42]
-            });
-
-for (let i = 0; i < data.length; i++)
-{
-    markers.addLayer(L.marker([data[i].loc.coordinates[1],data[i].loc.coordinates[0]], {icon: blueIcon}).bindPopup('Problem: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', '  + data[i].loc.coordinates[0]));
-}
-});
-});
-
-$(".button5").click(function()
-{
-$.get("https://api.sense.city/statistics/issue?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&issue=lighting&limit=30", function(data, status)
-{
-    
-    console.log(data);
-
-    var goldIcon = L.divIcon({
-                className: 'custom-div-icon',
-                html: "<div style='background-color:#FFD326;' class='marker-pin'></div><i class='material-icons'>light</i>",
-                iconSize: [30, 42],
-                iconAnchor: [15, 42]
-            });
-    
-    for (let i = 0; i < data.length; i++)
+    $(document).ready(function()
     {
-        markers.addLayer(L.marker([data[i].loc.coordinates[1],data[i].loc.coordinates[0]], {icon: goldIcon}).bindPopup('Problem: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', '  + data[i].loc.coordinates[0]));
-    }
-});
-});
+        var markers = new L.MarkerClusterGroup();
 
-$(".button6").click(function()
-{
-    $.get("https://api.sense.city/statistics/issue?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&issue=plumbing&limit=30", function(data, status)
+        const d = new Date();
+        var month = d.getMonth() + 1;
+        var monthp = d.getMonth();
+        var date = d.getDate();
+        var year = d.getFullYear();
+        var m = month.toString();
+        var mp = monthp.toString();
+        var day = date.toString();
+        var y = year.toString();
 
-    {
-        
-        console.log(data);
-
-        var redIcon = L.divIcon({
-                className: 'custom-div-icon',
-                html: "<div style='background-color:#CB2B3E;' class='marker-pin'></div><i class='material-icons'>plumbing</i>",
-                iconSize: [30, 42],
-                iconAnchor: [15, 42]
-            });
-        
-        for (let i = 0; i < data.length; i++)
+        if (month<10)
         {
-            markers.addLayer(L.marker([data[i].loc.coordinates[1],data[i].loc.coordinates[0]], {icon: redIcon}).bindPopup('Problem: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', '  + data[i].loc.coordinates[0]));
+        m = "0" + m;
+        }
+        if (monthp<10)
+        {
+        mp = "0" + mp;
+        }
+        if (date<10)
+        {
+        day = "0" + day;
         }
 
-    });
-});
 
-    $(".button7").click(function()
-    {
-        $.get("https://api.sense.city/statistics/issue?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&issue=road-constructor&limit=30", function(data, status)
-        
+        $(".button4").click(function()
         {
-            
-            console.log(data);
-        
-
-            var greenIcon = L.divIcon({
-            className: 'custom-div-icon',
-            html: "<div style='background-color:#2AAD27;' class='marker-pin'></div><i class='material-icons'>remove_road</i>",
-            iconSize: [30, 42],
-            iconAnchor: [15, 42]
-        });
-
-            
-            for (let i = 0; i < data.length; i++)
+            $.get("https://api.sense.city/statistics/issue?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&issue=garbage&limit=30", function(data, status)
             {
-                markers.addLayer(L.marker([data[i].loc.coordinates[1],data[i].loc.coordinates[0]], {icon: greenIcon}).bindPopup('Problem: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', '  + data[i].loc.coordinates[0]));
-            }
 
-        });
-    });
-
-        $(".button8").click(function()
-        {
-            $.get("https://api.sense.city/statistics/issue?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&issue=protection-policy&limit=30", function(data, status)
-            
-            {
-                
                 console.log(data);
 
-                var orangeIcon = L.divIcon({
-                className: 'custom-div-icon',
-                html: "<div style='background-color:#CB8427;' class='marker-pin'></div><i class='material-icons'>local_police</i>",
-                iconSize: [30, 42],
-                iconAnchor: [15, 42]
-            });
-                
-                for (let i = 0; i < data.length; i++)
-                {
-                    markers.addLayer(L.marker([data[i].loc.coordinates[1],data[i].loc.coordinates[0]], {icon: orangeIcon}).bindPopup('Problem: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', '  + data[i].loc.coordinates[0]));
-                }
-
-            });
-        });
-
-            $(".button9").click(function()
-            {
-                $.get("https://api.sense.city/statistics/issue?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&issue=green&limit=30", function(data, status)
-                
-                {
-                    
-                    console.log(data);
-                    
-                    var greyIcon = L.divIcon({
+                var blueIcon = L.divIcon({
                     className: 'custom-div-icon',
-                    html: "<div style='background-color:#7B7B7B;' class='marker-pin'></div><i class='material-icons'>spa</i>",
+                    html: "<div style='background-color:#2A81CB;' class='marker-pin'></div><i class='material-icons'>delete</i>",
                     iconSize: [30, 42],
                     iconAnchor: [15, 42]
                 });
+
+                for (let i = 0; i < data.length; i++)
+                {
+                    markers.addLayer(L.marker([data[i].loc.coordinates[1],data[i].loc.coordinates[0]], {icon: blueIcon}).bindPopup('Problem: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', '  + data[i].loc.coordinates[0]));
+                }
+            });
+        });
+
+            $(".button5").click(function()
+            {
+                $.get("https://api.sense.city/statistics/issue?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&issue=lighting&limit=30", function(data, status)
+                {
+                    
+                    console.log(data);
+
+                    var goldIcon = L.divIcon({
+                        className: 'custom-div-icon',
+                        html: "<div style='background-color:#FFD326;' class='marker-pin'></div><i class='material-icons'>light</i>",
+                        iconSize: [30, 42],
+                        iconAnchor: [15, 42]
+                    });
+                    
                     for (let i = 0; i < data.length; i++)
                     {
-                        markers.addLayer(L.marker([data[i].loc.coordinates[1],data[i].loc.coordinates[0]], {icon: greyIcon}).bindPopup('Problem: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', '  + data[i].loc.coordinates[0]));
+                        markers.addLayer(L.marker([data[i].loc.coordinates[1],data[i].loc.coordinates[0]], {icon: goldIcon}).bindPopup('Problem: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', '  + data[i].loc.coordinates[0]));
                     }
-
                 });
             });
 
-                $(".button10").click(function()
+                $(".button6").click(function()
                 {
-                    $.get("https://api.sense.city/statistics/issue?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&issue=environment&limit=30", function(data, status)
-                    
+                    $.get("https://api.sense.city/statistics/issue?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&issue=plumbing&limit=30", function(data, status)
+
                     {
                         
                         console.log(data);
 
-                        var violetIcon = L.divIcon({
-                        className: 'custom-div-icon',
-                        html: "<div style='background-color:#9C2BCB;' class='marker-pin'></div><i class='material-icons'>forest</i>",
-                        iconSize: [30, 42],
-                        iconAnchor: [15, 42]
-                    });
+                        var redIcon = L.divIcon({
+                                    className: 'custom-div-icon',
+                                    html: "<div style='background-color:#CB2B3E;' class='marker-pin'></div><i class='material-icons'>plumbing</i>",
+                                    iconSize: [30, 42],
+                                    iconAnchor: [15, 42]
+                                });
                         
                         for (let i = 0; i < data.length; i++)
                         {
-                            markers.addLayer(L.marker([data[i].loc.coordinates[1],data[i].loc.coordinates[0]], {icon: violetIcon}).bindPopup('Problem: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', '  + data[i].loc.coordinates[0]));
+                            markers.addLayer(L.marker([data[i].loc.coordinates[1],data[i].loc.coordinates[0]], {icon: redIcon}).bindPopup('Problem: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', '  + data[i].loc.coordinates[0]));
                         }
 
                     });
                 });
-map.addLayer(markers).addTo(map);
 
-});
+                    $(".button7").click(function()
+                    {
+                        $.get("https://api.sense.city/statistics/issue?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&issue=road-constructor&limit=30", function(data, status)
+                        
+                        {
+                            
+                            console.log(data);
+                        
+
+                            var greenIcon = L.divIcon({
+                                className: 'custom-div-icon',
+                                html: "<div style='background-color:#2AAD27;' class='marker-pin'></div><i class='material-icons'>remove_road</i>",
+                                iconSize: [30, 42],
+                                iconAnchor: [15, 42]
+                            });
+
+                            
+                            for (let i = 0; i < data.length; i++)
+                            {
+                                markers.addLayer(L.marker([data[i].loc.coordinates[1],data[i].loc.coordinates[0]], {icon: greenIcon}).bindPopup('Problem: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', '  + data[i].loc.coordinates[0]));
+                            }
+
+                        });
+                    });
+
+                        $(".button8").click(function()
+                        {
+                            $.get("https://api.sense.city/statistics/issue?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&issue=protection-policy&limit=30", function(data, status)
+                            
+                            {
+                                
+                                console.log(data);
+
+                                var orangeIcon = L.divIcon({
+                                    className: 'custom-div-icon',
+                                    html: "<div style='background-color:#CB8427;' class='marker-pin'></div><i class='material-icons'>local_police</i>",
+                                    iconSize: [30, 42],
+                                    iconAnchor: [15, 42]
+                                });
+                                
+                                for (let i = 0; i < data.length; i++)
+                                {
+                                    markers.addLayer(L.marker([data[i].loc.coordinates[1],data[i].loc.coordinates[0]], {icon: orangeIcon}).bindPopup('Problem: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', '  + data[i].loc.coordinates[0]));
+                                }
+
+                            });
+                        });
+
+                            $(".button9").click(function()
+                            {
+                                $.get("https://api.sense.city/statistics/issue?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&issue=green&limit=30", function(data, status)
+                                
+                                {
+                                    
+                                    console.log(data);
+                                    
+                                    var greyIcon = L.divIcon({
+                                        className: 'custom-div-icon',
+                                        html: "<div style='background-color:#7B7B7B;' class='marker-pin'></div><i class='material-icons'>spa</i>",
+                                        iconSize: [30, 42],
+                                        iconAnchor: [15, 42]
+                                    });
+                                    for (let i = 0; i < data.length; i++)
+                                    {
+                                        markers.addLayer(L.marker([data[i].loc.coordinates[1],data[i].loc.coordinates[0]], {icon: greyIcon}).bindPopup('Problem: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', '  + data[i].loc.coordinates[0]));
+                                    }
+
+                                });
+                            });
+
+                                $(".button10").click(function()
+                                {
+                                    $.get("https://api.sense.city/statistics/issue?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&issue=environment&limit=30", function(data, status)
+                                    
+                                    {
+                                        
+                                        console.log(data);
+
+                                        var violetIcon = L.divIcon({
+                                            className: 'custom-div-icon',
+                                            html: "<div style='background-color:#9C2BCB;' class='marker-pin'></div><i class='material-icons'>forest</i>",
+                                            iconSize: [30, 42],
+                                            iconAnchor: [15, 42]
+                                        });
+                                        
+                                        for (let i = 0; i < data.length; i++)
+                                        {
+                                            markers.addLayer(L.marker([data[i].loc.coordinates[1],data[i].loc.coordinates[0]], {icon: violetIcon}).bindPopup('Problem: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', '  + data[i].loc.coordinates[0]));
+                                        }
+
+                                    });
+                                });
+        map.addLayer(markers).addTo(map);
+
+    });
 </script>
 
 
