@@ -69,56 +69,56 @@
                     });
             });
 
-            $(".button2").click(function() {
+                $(".button2").click(function() {
 
 
-                // console.log(day + m + y);
+                    // console.log(day + m + y);
 
 
-                $.get("https://api.sense.city/api/1.0/feelings?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&feeling=neutral&limit=30", function(data, status) {
+                    $.get("https://api.sense.city/api/1.0/feelings?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&feeling=neutral&limit=30", function(data, status) {
 
-                    console.log(data);
+                        console.log(data);
 
-                    var NeutralIcon = L.divIcon({
-                        className: 'custom-div-icon',
-                        html: "<div style='background-color:#FFD326;' class='marker-pin'></div><i class='material-icons'>sentiment_neutral</i>",
-                        iconSize: [30, 42],
-                        iconAnchor: [15, 42]
-                    });
-
-
-                    console.log(data);
-
-                    for (let i = 0; i < data.length; i++) {
-                        markers.addLayer(L.marker([data[i].loc.coordinates[1], data[i].loc.coordinates[0]], {
-                            icon: NeutralIcon
-                        }).bindPopup('Feeling: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', ' + data[i].loc.coordinates[0]));
-                    }
-
-                });
-            });
-
-            $(".button3").click(function() {
-                $.get("https://api.sense.city/api/1.0/feelings?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&feeling=angry&limit=30", function(data, status)
-
-                    {
-                        var AngryIcon = L.divIcon({
+                        var NeutralIcon = L.divIcon({
                             className: 'custom-div-icon',
-                            html: "<div style='background-color:#CB2B3E;' class='marker-pin'></div><i class='material-icons'>mood_bad</i>",
+                            html: "<div style='background-color:#FFD326;' class='marker-pin'></div><i class='material-icons'>sentiment_neutral</i>",
                             iconSize: [30, 42],
                             iconAnchor: [15, 42]
                         });
+
 
                         console.log(data);
 
                         for (let i = 0; i < data.length; i++) {
                             markers.addLayer(L.marker([data[i].loc.coordinates[1], data[i].loc.coordinates[0]], {
-                                icon: AngryIcon
+                                icon: NeutralIcon
                             }).bindPopup('Feeling: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', ' + data[i].loc.coordinates[0]));
                         }
 
                     });
-            });
+                });
+
+                    $(".button3").click(function() {
+                        $.get("https://api.sense.city/api/1.0/feelings?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&feeling=angry&limit=30", function(data, status)
+
+                            {
+                                var AngryIcon = L.divIcon({
+                                    className: 'custom-div-icon',
+                                    html: "<div style='background-color:#CB2B3E;' class='marker-pin'></div><i class='material-icons'>mood_bad</i>",
+                                    iconSize: [30, 42],
+                                    iconAnchor: [15, 42]
+                                });
+
+                                console.log(data);
+
+                                for (let i = 0; i < data.length; i++) {
+                                    markers.addLayer(L.marker([data[i].loc.coordinates[1], data[i].loc.coordinates[0]], {
+                                        icon: AngryIcon
+                                    }).bindPopup('Feeling: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', ' + data[i].loc.coordinates[0]));
+                                }
+
+                            });
+                    });
             map.addLayer(markers).addTo(map);
         });
     </script>
