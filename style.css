@@ -1,0 +1,171 @@
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #484848;
+
+}
+
+li {
+    float: left;
+    font-size: 1.2em;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #484848;
+}
+
+
+body
+{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-image: url('patra.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover;
+}
+
+p.mood 
+{
+    text-shadow: 2px 2px 5px #3982e8;
+    color: white;
+}
+
+p.problems 
+{
+    text-shadow: 2px 2px 5px #3982e8;
+    color: white;
+}
+
+#map
+{
+    /* box-shadow: 0px 0px 15px #3982e8; */
+    border: 5px solid #484848;
+    padding: 15px;
+
+    width: 75vw;
+    height: 80vh; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button 
+{
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+
+
+.button1
+{
+    background-color: #2AAD27; 
+}
+
+.button2
+{
+    background-color: #FFD326	; 
+}
+
+.button3
+{
+    background-color: #CB2B3E; 
+}
+
+.button4
+{
+    background-color: #2A81CB; 
+}
+
+.button5
+{
+    background-color: #FFD326; 
+}
+
+.button6
+{
+    background-color: #CB2B3E; 
+}
+
+.button7
+{
+    background-color: #2AAD27; 
+}
+
+.button8
+{
+    background-color: #CB8427; 
+}
+
+.button9
+{
+    background-color: #7B7B7B ; 
+}
+
+.button10
+{
+    background-color: #9C2BCB; 
+}
+
+
+
+.button:hover 
+{
+    box-shadow: 0px 0px 15px #373737;
+}
+
+
+.marker-pin {
+    width: 30px;
+    height: 30px;
+    border-radius: 50% 50% 50% 0;
+    position: absolute;
+    transform: rotate(-45deg); 
+    left: 50%;
+    top: 50%;
+    margin: -15px 0 0 -15px;
+  }
+  
+  .marker-pin::after {
+      content: '';
+      width: 24px;
+      height: 24px;
+      margin: 3px 18px 12px -12px;
+      background: #fff;
+      position: absolute;
+      border-radius: 50%;
+   }
+  
+  .custom-div-icon i {
+     position: absolute;
+     width: 22px;
+     font-size: 22px;
+     left: 0;
+     right: 0;
+     margin: 10px auto;
+     text-align: center;
+  }
+  
+  .custom-div-icon i.awesome {
+     margin: 12px auto;
+     font-size: 17px;
+  }

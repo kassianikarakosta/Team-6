@@ -1,14 +1,133 @@
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
-    <title>Main</title>
+    <title>Mood</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
     <link rel="stylesheet" href="./style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Clusters -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
+
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
+
+
+
+
+    <script>
+        $(document).ready(function() {
+            var markers = new L.MarkerClusterGroup();
+
+            const d = new Date();
+            var month = d.getMonth() + 1;
+            var monthp = d.getMonth();
+            var date = d.getDate();
+            var year = d.getFullYear();
+            var m = month.toString();
+            var mp = monthp.toString();
+            var day = date.toString();
+            var y = year.toString();
+            if (month < 10) {
+                m = "0" + m;
+            }
+            if (date < 10) {
+                day = "0" + day;
+            }
+
+
+
+            $(".button1").click(function() {
+                $.get("https://api.sense.city/api/1.0/feelings?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&feeling=happy&limit=30", function(data, status)
+
+                    {
+                        console.log(data);
+
+                        var HappyIcon = L.divIcon({
+                            className: 'custom-div-icon',
+                            html: "<div style='background-color:#2AAD27;' class='marker-pin'></div><i class='material-icons'>mood</i>",
+                            iconSize: [30, 42],
+                            iconAnchor: [15, 42]
+                        });
+
+                        for (let i = 0; i < data.length; i++) {
+                            // const markers = new L.MarkerClusterGroup();
+                            markers.addLayer(L.marker([data[i].loc.coordinates[1], data[i].loc.coordinates[0]], {
+                                icon: HappyIcon
+                            }).bindPopup('Feeling: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', ' + data[i].loc.coordinates[0]));
+                            // map.addLayer(markers);
+                        }
+                    });
+            });
+
+            $(".button2").click(function() {
+
+
+                // console.log(day + m + y);
+
+
+                $.get("https://api.sense.city/api/1.0/feelings?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&feeling=neutral&limit=30", function(data, status) {
+
+                    console.log(data);
+
+                    var NeutralIcon = L.divIcon({
+                        className: 'custom-div-icon',
+                        html: "<div style='background-color:#FFD326;' class='marker-pin'></div><i class='material-icons'>sentiment_neutral</i>",
+                        iconSize: [30, 42],
+                        iconAnchor: [15, 42]
+                    });
+
+
+                    console.log(data);
+
+                    for (let i = 0; i < data.length; i++) {
+                        markers.addLayer(L.marker([data[i].loc.coordinates[1], data[i].loc.coordinates[0]], {
+                            icon: NeutralIcon
+                        }).bindPopup('Feeling: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', ' + data[i].loc.coordinates[0]));
+                    }
+
+                });
+            });
+
+            $(".button3").click(function() {
+                $.get("https://api.sense.city/api/1.0/feelings?city=patras&startdate=" + y + "-" + mp + "-" + day + "&enddate=" + y + "-" + m + "-" + day + "&feeling=angry&limit=30", function(data, status)
+
+                    {
+                        var AngryIcon = L.divIcon({
+                            className: 'custom-div-icon',
+                            html: "<div style='background-color:#CB2B3E;' class='marker-pin'></div><i class='material-icons'>mood_bad</i>",
+                            iconSize: [30, 42],
+                            iconAnchor: [15, 42]
+                        });
+
+                        console.log(data);
+
+                        for (let i = 0; i < data.length; i++) {
+                            markers.addLayer(L.marker([data[i].loc.coordinates[1], data[i].loc.coordinates[0]], {
+                                icon: AngryIcon
+                            }).bindPopup('Feeling: ' + data[i].issue + '</br>' + 'Coordinates: ' + data[i].loc.coordinates[1] + ', ' + data[i].loc.coordinates[0]));
+                        }
+
+                    });
+            });
+            map.addLayer(markers).addTo(map);
+        });
+    </script>
+
+
 </head>
 
 <body>
 
-    <div id="background"></div>
-    
     <ul>
         <li><a class="active" href="./main.htm">Αρχική</a></li>
         <li><a href="./Mood.htm">Mood</a></li>
@@ -18,5 +137,31 @@
     </ul>
     </br>
 
+
+    <div id="map"></div>
+
+    <script>
+        const map = L.map('map', {
+            center: [38.25, 21.73],
+            zoom: 12.0
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    </script>
+
+
+
+    <p class="mood">Mood</p>
+    <button class="button button1">Happy</button>
+    <button class="button button2">Neutral</button>
+    <button class="button button3">Angry</button></br>
+    </br>
+
+
+
+
 </body>
+
 </html>
